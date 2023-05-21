@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.courseMapper">
+    <select id="findCourseById"
+            parameterType="pojo.Course"
+            resultType="pojo.Course">
+        select * from c_course where id=#{id}
+    </select>
+
+    <select id="selectAll"
+            parameterType="pojo.Course"
+            resultType="pojo.Course">
+        select * from c_course where 1=1
+        <if test="sid !=null and sid!=''">
+            and sid like concat('%',#{sid},'%')
+        </if>
+    </select>
+
+
+    <select id="findCourseBySid"
+            parameterType="pojo.Course"
+            resultType="pojo.Course">
+        select * from c_course where sid=#{sid};
+    </select>
+
+    <update id="updateHoursById"
+            parameterType="pojo.Course">
+        update c_course set name=#{name},hours=#{hours},sid=#{sid} where id=#{id}
+    </update>
+    <insert id="insertNew" parameterType="pojo.Course">
+            insert into c_course(id,name,hours,sid)value (#{id},#{name},#{hours},#{sid})
+    </insert>
+</mapper>
